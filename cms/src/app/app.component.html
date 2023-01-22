@@ -1,2 +1,10 @@
-<cms-header></cms-header>
-<cms-contacts></cms-contacts>
+<!-- added the ability to switch between pages
+$event passes data -->
+<cms-header (selectedFeatureEvent)="switchView($event)"></cms-header>
+<div class="container pull-left">
+  <!-- ifs make is so the page changes based 
+  on the value -->
+  <cms-documents *ngIf="selectedFeature === 'documents'"></cms-documents>
+  <cms-message-list *ngIf="selectedFeature === 'messages'"></cms-message-list>
+  <cms-contacts *ngIf="selectedFeature === 'contacts'"></cms-contacts>
+</div>

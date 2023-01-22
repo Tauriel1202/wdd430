@@ -1,9 +1,18 @@
 <div class="row">
   <div class="col-sm-1"></div>
-  <div class="col-sm-6">
-    <cms-contact-list></cms-contact-list>
+  <div class="col-md-5">
+    <!-- methods passes data with $event
+    and gets the list -->
+    <cms-contact-list
+      (selectedContactEvent)="selectedContact = $event"
+    ></cms-contact-list>
   </div>
-  <div class="col-sm-4">
-    <cms-contact-detail></cms-contact-detail>
+  <div class="col-md-5">
+    <!-- if the contact is selected the [] var
+    displays the related details -->
+    <cms-contact-detail
+      *ngIf="selectedContact"
+      [contact]="selectedContact"
+    ></cms-contact-detail>
   </div>
 </div>

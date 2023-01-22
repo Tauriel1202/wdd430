@@ -12,21 +12,15 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-xs-12">
-        <a href="#" class="list-group-item clearfix" *ngFor="let i of contacts">
-          <div class="pull-left">
-            <h4 class="list-group-item-heading">{{ i.name }}</h4>
-          </div>
-          <span class="pull-right">
-            <img
-              src="{{ i.imgUrl }}"
-              alt="{{ i.name }}"
-              width="100"
-              height="100"
-              class="img-responsive"
-              style="max-height: 50px; width: auto"
-            />
-          </span>
-        </a>
+        <!-- contact item loops through the list
+        [] var is set to a single item
+        ()= uses a method to get the data used 
+        in the contact item -->
+        <cms-contact-item
+          *ngFor="let i of contacts"
+          [contact]="i"
+          (contactSelected)="onSelected(i)"
+        ></cms-contact-item>
       </div>
     </div>
   </div>
