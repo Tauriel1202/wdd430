@@ -1,0 +1,21 @@
+/* .gridded {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.gridImg {
+  grid-column: 1 / 2;
+} */
+
+.lowerLeftBtn {
+  margin: 3em;
+}
+
+.spaceBetweenBtns {
+  margin: 1em;
+}
+
+.spaceBetweenBtns:nth-of-type(2) {
+  border: 1px solid brown;
+  margin-left: 1em;
+}
