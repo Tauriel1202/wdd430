@@ -1,7 +1,10 @@
+import { EventEmitter } from '@angular/core';
 import { Message } from './message.model';
 import { MOCKMESSAGES } from './MOCKMESSAGES';
 
 export class msgService {
+  messageChangedEvent = new EventEmitter<Message[]>();
+
   public msgs: Message[] = [];
 
   constructor() {
@@ -19,5 +22,11 @@ export class msgService {
       }
     }
     return null!;
+  }
+
+  addMessage(message: Message) {
+    this.msgs.push(message);
+    this.messageChangedEvent.emit(this.msgs.slice());
+    console.log('The Elves are sending a message.');
   }
 }

@@ -24,7 +24,7 @@ export const MOCKCONTACTS: Contact[] = [
     name: 'Elrond Half-Elven',
     email: 'durinsfriend@lindon.elf',
     phone: '412-528-7896',
-    imgUrl: '../../assets/images/elrond.png',
+    imgUrl: '../../assets/images/elrondContact.jpg',
     group: null,
   },
   {
@@ -33,6 +33,14 @@ export const MOCKCONTACTS: Contact[] = [
     email: 'leaderoftoads@mushroomkingdom.toad',
     phone: '125-856-9874',
     imgUrl: '../../assets/images/peach.png',
+    group: null,
+  },
+  {
+    id: '2020',
+    name: 'Courtney',
+    email: '',
+    phone: '',
+    imgUrl: '../../assets/images/meGaladrielDressPink.jpg',
     group: null,
   },
   {
