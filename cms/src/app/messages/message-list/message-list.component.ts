@@ -1,24 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Message } from '../message.model';
+import { msgService } from '../message.service';
 
 @Component({
   selector: 'cms-message-list',
   templateUrl: './message-list.component.html',
   styleUrls: ['./message-list.component.css'],
 })
-export class MessageListComponent {
+export class MessageListComponent implements OnInit {
   // list of msgs to display
-  messages: Message[] = [
-    new Message(
-      1,
-      'Pickup from Store',
-      'Grab pb, pie crust, and cream cheese',
-      "Aldmond"
-    ),
-    new Message(2, 'Quest paths', 'desert, dungeon, snow', 'Maethoriel'),
-    new Message(3, 'Elf Warriors', 'Galadriel, Tauriel, Legolas, Elrond', "ElfLover"),
-    new Message(4, 'Dungeon Guards', 'Bric, Evet, Torg', 'Galawyn')
-  ];
+  messages: Message[] = [];
+
+  constructor(private msgService: msgService) {}
+
+  ngOnInit() {
+    this.messages = this.msgService.getMessages();
+  }
 
   // method adds new msgs to the lst
   onAddMessage(message: Message) {
