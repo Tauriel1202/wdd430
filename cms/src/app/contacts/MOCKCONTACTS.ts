@@ -44,6 +44,14 @@ export const MOCKCONTACTS: Contact[] = [
     group: null,
   },
   {
+    id: '24',
+    name: 'Toad',
+    email: 'oneoftheshrooms@mushroomkingdom.toad',
+    phone: '425-758-8852',
+    imgUrl: '../../assets/images/toad.png',
+    group: null,
+  },
+  {
     id: '1',
     name: 'Rex Barzee',
     email: 'barzeer@byui.edu',

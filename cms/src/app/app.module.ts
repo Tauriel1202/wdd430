@@ -20,6 +20,7 @@ import { DropdownDirective } from './dropdown.directive';
 import { ContactService } from './contacts/contact.service';
 import { docService } from './documents/documents.service';
 import { msgService } from './messages/message.service';
+import { AppRoutingModule } from './appRouting.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { msgService } from './messages/message.service';
     MessageListComponent,
     DropdownDirective,
   ],
-  imports: [BrowserModule, FormsModule],
+  imports: [AppRoutingModule, BrowserModule, FormsModule],
   providers: [ContactService, docService, msgService],
   bootstrap: [AppComponent],
 })
