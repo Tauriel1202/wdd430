@@ -18,13 +18,14 @@ export class ContactService {
   }
 
   getContact(id: string) {
-    //   for (const i of this.contacts) {
-    //     if (i.id == id) {
-    //       return i;
-    //     }
-    //   }
+      for (const i of this.contacts) {
+        if (i.id == id) {
+          console.log(i)
+          return i;
+        }
+      }
 
-    //   return null!;
+      // return null!;
     // }
     return this.contacts[+id];
   }

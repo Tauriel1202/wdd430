@@ -36,7 +36,7 @@ export const MOCKCONTACTS: Contact[] = [
     group: null,
   },
   {
-    id: '2020',
+    id: '-2020',
     name: 'Courtney',
     email: '',
     phone: '',
@@ -52,7 +52,7 @@ export const MOCKCONTACTS: Contact[] = [
     group: null,
   },
   {
-    id: '1',
+    id: '31',
     name: 'Rex Barzee',
     email: 'barzeer@byui.edu',
     phone: '208-496-3768',
@@ -61,7 +61,7 @@ export const MOCKCONTACTS: Contact[] = [
   },
   // index 1
   {
-    id: '2',
+    id: '32',
     name: 'Bradley Armstrong',
     email: 'armstrongb@byui.edu',
     phone: '208-496-3766',
@@ -70,7 +70,7 @@ export const MOCKCONTACTS: Contact[] = [
   },
   // index 2
   {
-    id: '3',
+    id: '33',
     name: 'Lee Barney',
     email: 'barneyl@byui.edu',
     phone: '208-496-3767',
@@ -79,7 +79,7 @@ export const MOCKCONTACTS: Contact[] = [
   },
   // index 3
   {
-    id: '5',
+    id: '35',
     name: 'Kory Godfrey',
     email: 'godfreyko@byui.edu',
     phone: '208-496-3770',
@@ -88,7 +88,7 @@ export const MOCKCONTACTS: Contact[] = [
   },
   // index 4
   {
-    id: '7',
+    id: '37',
     name: 'R. Kent Jackson',
     email: 'jacksonk@byui.edu',
     phone: '208-496-3771',
@@ -97,7 +97,7 @@ export const MOCKCONTACTS: Contact[] = [
   },
   // index 5
   {
-    id: '8',
+    id: '38',
     name: 'Craig Lindstrom',
     email: 'lindstromc@byui.edu',
     phone: '208-496-3769',
@@ -106,7 +106,7 @@ export const MOCKCONTACTS: Contact[] = [
   },
   // index 6
   {
-    id: '9',
+    id: '39',
     name: 'Michael McLaughlin',
     email: 'mclaughlinm@byui.edu',
     phone: '208-496-3772',
@@ -115,7 +115,7 @@ export const MOCKCONTACTS: Contact[] = [
   },
   // index 7
   {
-    id: '11',
+    id: '311',
     name: 'Brent Morring',
     email: 'morringb@byui.edu',
     phone: '208-496-3778',
@@ -124,7 +124,7 @@ export const MOCKCONTACTS: Contact[] = [
   },
   // index 8
   {
-    id: '12',
+    id: '312',
     name: 'Mark Olaveson',
     email: 'olavesonm@byui.edu',
     phone: '208-496-3773',
@@ -133,7 +133,7 @@ export const MOCKCONTACTS: Contact[] = [
   },
   // index 9
   {
-    id: '13',
+    id: '313',
     name: 'Steven Rigby',
     email: 'rigbys@byui.edu',
     phone: '208-496-3774',
@@ -142,7 +142,7 @@ export const MOCKCONTACTS: Contact[] = [
   },
   // index 10
   {
-    id: '15',
+    id: '315',
     name: 'Blaine Robertson',
     email: 'robertsonb@byui.edu',
     phone: '208-496-3775',
@@ -151,7 +151,7 @@ export const MOCKCONTACTS: Contact[] = [
   },
   // index 11
   {
-    id: '16',
+    id: '316',
     name: 'Randy Somsen',
     email: 'somsenr@byui.edu',
     phone: '208-496-3776',
@@ -160,7 +160,7 @@ export const MOCKCONTACTS: Contact[] = [
   },
   // index 12
   {
-    id: '17',
+    id: '317',
     name: 'Shane Thompson',
     email: 'thompsonda@byui.edu',
     phone: '208-496-3776',
@@ -171,14 +171,14 @@ export const MOCKCONTACTS: Contact[] = [
   // teams
   // index 13
   {
-    id: '4',
+    id: '34',
     name: 'Network/OS team',
     email: ' ',
     phone: ' ',
     imgUrl: ' ',
     group: [
       {
-        id: '2',
+        id: '32',
         name: 'Bradley Armstrong',
         email: 'armstrongb@byui.edu',
         phone: '208-496-3766',
@@ -186,7 +186,7 @@ export const MOCKCONTACTS: Contact[] = [
         group: null,
       },
       {
-        id: '12',
+        id: '312',
         name: 'Mark Olaveson',
         email: 'olavesonm@byui.edu',
         phone: '208-496-3773',
@@ -194,7 +194,7 @@ export const MOCKCONTACTS: Contact[] = [
         group: null,
       },
       {
-        id: '13',
+        id: '313',
         name: 'Steven Rigby',
         email: 'rigbys@byui.edu',
         phone: '208-496-3774',
@@ -206,14 +206,14 @@ export const MOCKCONTACTS: Contact[] = [
 
   // index 14
   {
-    id: '6',
+    id: '36',
     name: 'Software Development team',
     email: ' ',
     phone: ' ',
     imgUrl: ' ',
     group: [
       {
-        id: '1',
+        id: '31',
         name: 'Rex Barzee',
         email: 'barzeer@byui.edu',
         phone: '208-496-3768',
@@ -221,7 +221,7 @@ export const MOCKCONTACTS: Contact[] = [
         group: null,
       },
       {
-        id: '3',
+        id: '33',
         name: 'Lee Barney',
         email: 'barneyl@byui.edu',
         phone: '208-496-3767',
@@ -229,7 +229,7 @@ export const MOCKCONTACTS: Contact[] = [
         group: null,
       },
       {
-        id: '7',
+        id: '37',
         name: 'R. Kent Jackson',
         email: 'jacksonk@byui.edu',
         phone: '208-496-3771',
@@ -237,7 +237,7 @@ export const MOCKCONTACTS: Contact[] = [
         group: null,
       },
       {
-        id: '12',
+        id: '312',
         name: 'Mark Olaveson',
         email: 'olavesonm@byui.edu',
         phone: '208-496-3773',
@@ -249,14 +249,14 @@ export const MOCKCONTACTS: Contact[] = [
 
   // index 15
   {
-    id: '10',
+    id: '310',
     name: 'Web Development team',
     email: ' ',
     phone: ' ',
     imgUrl: ' ',
     group: [
       {
-        id: '15',
+        id: '315',
         name: 'Blaine Robertson',
         email: 'robertsonb@byui.edu',
         phone: '208-496-3775',
@@ -264,7 +264,7 @@ export const MOCKCONTACTS: Contact[] = [
         group: null,
       },
       {
-        id: '16',
+        id: '316',
         name: 'Randy Somsen',
         email: 'somsenr@byui.edu',
         phone: '208-496-3776',
@@ -272,7 +272,7 @@ export const MOCKCONTACTS: Contact[] = [
         group: null,
       },
       {
-        id: '17',
+        id: '317',
         name: 'Shane Thompson',
         email: 'thompsonda@byui.edu',
         phone: '208-496-3776',
@@ -284,14 +284,14 @@ export const MOCKCONTACTS: Contact[] = [
 
   // index 16
   {
-    id: '14',
+    id: '314',
     name: 'Database team',
     email: ' ',
     phone: ' ',
     imgUrl: ' ',
     group: [
       {
-        id: '7',
+        id: '37',
         name: 'R. Kent Jackson',
         email: 'jacksonk@byui.edu',
         phone: '208-496-3771',
@@ -299,7 +299,7 @@ export const MOCKCONTACTS: Contact[] = [
         group: null,
       },
       {
-        id: '9',
+        id: '39',
         name: 'Michael McLaughlin',
         email: 'mclaughlinm@byui.edu',
         phone: '208-496-3772',
@@ -307,7 +307,7 @@ export const MOCKCONTACTS: Contact[] = [
         group: null,
       },
       {
-        id: '11',
+        id: '311',
         name: 'Brent Morring',
         email: 'morringb@byui.edu',
         phone: '208-496-3778',
@@ -319,14 +319,14 @@ export const MOCKCONTACTS: Contact[] = [
 
   // index 17
   {
-    id: '18',
+    id: '318',
     name: 'Computer Security team',
     email: ' ',
     phone: ' ',
     imgUrl: ' ',
     group: [
       {
-        id: '5',
+        id: '35',
         name: 'Kory Godfrey',
         email: 'godfreyko@byui.edu',
         phone: '208-496-3770',
@@ -334,7 +334,7 @@ export const MOCKCONTACTS: Contact[] = [
         group: null,
       },
       {
-        id: '8',
+        id: '38',
         name: 'Craig Lindstrom',
         email: 'lindstromc@byui.edu',
         phone: '208-496-3769',
@@ -342,7 +342,7 @@ export const MOCKCONTACTS: Contact[] = [
         group: null,
       },
       {
-        id: '13',
+        id: '313',
         name: 'Steven Rigby',
         email: 'rigbys@byui.edu',
         phone: '208-496-3774',
