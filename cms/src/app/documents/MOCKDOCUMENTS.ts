@@ -1,4 +1,16 @@
 export const MOCKDOCUMENTS: any[] = [
+  {
+    id: '51',
+    name: 'Wayu-Wayu Chamber of Commerce',
+    url: 'https://tauriel1202.github.io/wdd230/Chamber/',
+    children: [],
+  },
+  {
+    id: '61',
+    name: 'Temple Inn and Suites',
+    url: 'https://tauriel1202.github.io/wdd230/hotel/index.html',
+    children: [],
+  },
   { id: '11', name: 'Recipe Book', url: '../../RecipeBook', children: [] },
   {
     id: '21',

@@ -5,21 +5,19 @@
         <h4><strong>Contacts</strong></h4>
       </div>
       <div class="col-sm-2">
-        <button class="btn btn-success pull-right">New Contact</button>
+        <button class="btn btn-success pull-right" routerLink="new">
+          New Contact
+        </button>
       </div>
     </div>
   </div>
   <div class="panel-body">
     <div class="row">
       <div class="col-xs-12">
-        <!-- contact item loops through the list
-        [] var is set to a single item
-        ()= uses a method to get the data used 
-        in the contact item -->
         <cms-contact-item
-          *ngFor="let i of contacts"
-          [contact]="i"
-          (contactSelected)="onSelected(i)"
+          *ngFor="let c of contacts; let i = index"
+          [contact]="c"
+          [index]="i"
         ></cms-contact-item>
       </div>
     </div>

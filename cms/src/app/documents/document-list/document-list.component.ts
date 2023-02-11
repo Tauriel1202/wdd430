@@ -12,14 +12,13 @@ export class DocumentListComponent implements OnInit {
 
   documents: Document[] = [];
 
-  constructor(private docService: docService) {}
-
-  ngOnInit() {
+  constructor(private docService: docService) {
     this.documents = this.docService.getDocuments();
   }
 
-  onSelectedDocument(document: Document) {
-    this.docService.documentSelectedEvent.emit(document);
-    console.log('The Elves are sending docs.')
+  ngOnInit() {
+    this.docService.documentChangedEvent.subscribe((documents: Document[]) => {
+      this.documents = documents;
+    });
   }
 }

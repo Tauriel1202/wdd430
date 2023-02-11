@@ -8,9 +8,6 @@
   <div class="col-md-5">
     <!-- if the contact is selected the [propertyName] var
     displays the related details -->
-    <cms-contact-detail
-      *ngIf="selectedContact"
-      [contact]="selectedContact"
-    ></cms-contact-detail>
+    <router-outlet></router-outlet>
   </div>
 </div>

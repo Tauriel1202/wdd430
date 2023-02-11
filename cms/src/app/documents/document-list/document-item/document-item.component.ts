@@ -8,6 +8,7 @@ import { Document } from '../../documents.model';
 })
 export class DocumentItemComponent {
   @Input() document!: Document;
+  @Input() index!: number;
   @Output() documentSelected = new EventEmitter<void>();
 
   onSelected() {

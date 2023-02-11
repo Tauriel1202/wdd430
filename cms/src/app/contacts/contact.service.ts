@@ -5,6 +5,7 @@ import { MOCKCONTACTS } from './MOCKCONTACTS';
 @Injectable()
 export class ContactService {
   contactSelectedEvent = new EventEmitter<Contact>();
+  contactChangedEvent = new EventEmitter<Contact[]>();
 
   public contacts: Contact[] = [];
 
@@ -16,13 +17,27 @@ export class ContactService {
     return this.contacts.slice();
   }
 
-  getContact(id: string): Contact {
-    for (const i of this.contacts) {
-      if (i.id == id) {
-        return i;
-      }
-    }
+  getContact(id: string) {
+    //   for (const i of this.contacts) {
+    //     if (i.id == id) {
+    //       return i;
+    //     }
+    //   }
 
-    return null!;
+    //   return null!;
+    // }
+    return this.contacts[+id];
+  }
+
+  deleteContact(contact: Contact) {
+    if (!contact) {
+      return;
+    }
+    const pos = this.contacts.indexOf(contact);
+    if (pos < 0) {
+      return;
+    }
+    this.contacts.splice(pos, 1);
+    this.contactChangedEvent.emit(this.contacts.slice());
   }
 }
