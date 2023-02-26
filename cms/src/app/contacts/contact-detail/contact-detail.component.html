@@ -23,7 +23,9 @@
           </button>
         </div>
         <div class="col-md-6">
-          <button class="btn btn-danger spaceBetweenBtns" (click)="onDelete()">Delete</button>
+          <button class="btn btn-danger spaceBetweenBtns" (click)="onDelete()">
+            Delete
+          </button>
         </div>
       </div>
     </div>
@@ -31,5 +33,26 @@
   <div class="panel-body">
     <h4>Email: {{ contact.email }}</h4>
     <h4>Phone: {{ contact.phone }}</h4>
+    <h4>Contacts:</h4>
+
+    <div class="panel-body">
+      <a
+        href="#"
+        class="list-group-item clearfix"
+        *ngFor="let g of contact.group"
+      >
+        <div class="pull-left">
+          <h4>{{ g.name }}</h4>
+        </div>
+        <span class="pull-right">
+          <img
+            src="{{ g.imgUrl }}"
+            alt="{{ g.name }}"
+            class="img-responsive"
+            style="max-height: 50px"
+          />
+        </span>
+      </a>
+    </div>
   </div>
 </div>

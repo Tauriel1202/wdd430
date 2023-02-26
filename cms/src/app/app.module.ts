@@ -11,7 +11,6 @@ import { DocumentsComponent } from './documents/documents.component';
 import { DocumentListComponent } from './documents/document-list/document-list.component';
 import { DocumentDetailComponent } from './documents/document-detail/document-detail.component';
 import { DocumentItemComponent } from './documents/document-list/document-item/document-item.component';
-import { FormsModule } from '@angular/forms';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageItemComponent } from './messages/message-item/message-item.component';
 import { MessageEditComponent } from './messages/message-edit/message-edit.component';
@@ -21,6 +20,10 @@ import { ContactService } from './contacts/contact.service';
 import { docService } from './documents/documents.service';
 import { msgService } from './messages/message.service';
 import { AppRoutingModule } from './appRouting.module';
+import { FormsModule } from '@angular/forms';
+import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
+import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
+import { DndModule } from 'ng2-dnd';
 
 @NgModule({
   declarations: [
@@ -29,10 +32,12 @@ import { AppRoutingModule } from './appRouting.module';
     ContactListComponent,
     ContactDetailComponent,
     ContactItemComponent,
+    ContactEditComponent,
     HeaderComponent,
     DocumentsComponent,
     DocumentListComponent,
     DocumentDetailComponent,
+    DocumentEditComponent,
     DocumentItemComponent,
     MessagesComponent,
     MessageItemComponent,
@@ -40,7 +45,7 @@ import { AppRoutingModule } from './appRouting.module';
     MessageListComponent,
     DropdownDirective,
   ],
-  imports: [AppRoutingModule, BrowserModule, FormsModule],
+  imports: [AppRoutingModule, BrowserModule, FormsModule, DndModule.forRoot()],
   providers: [ContactService, docService, msgService],
   bootstrap: [AppComponent],
 })
