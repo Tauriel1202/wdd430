@@ -20,7 +20,7 @@ export class MessageEditComponent {
   @ViewChild('subject') subjectInputRef!: ElementRef;
   @ViewChild('msgText') msgTextInputRef!: ElementRef;
   @Output() addMessageEvent = new EventEmitter<Message>();
-  currentSender = '-2020';
+  currentSender = '2';
 
   constructor(private msgService: msgService) {}
 
