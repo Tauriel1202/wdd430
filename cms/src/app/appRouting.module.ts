@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { ContactDetailComponent } from './contacts/contact-detail/contact-detail.component';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { ContactsComponent } from './contacts/contacts.component';
+// import { ContactsResolverService } from './contacts/contactsResolver.service';
 import { DocumentDetailComponent } from './documents/document-detail/document-detail.component';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { MessageListComponent } from './messages/message-list/message-list.component';
+import { MessagesComponent } from './messages/messages.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/documents', pathMatch: 'full' },
@@ -28,6 +30,11 @@ const appRoutes: Routes = [
       { path: ':id/edit', component: DocumentEditComponent },
     ],
   },
+  // {
+  //   path: 'messages',
+  //   component: MessagesComponent,
+  //   // resolve: [ContactsResolverService],
+  // },
   { path: 'messages', component: MessageListComponent },
 ];
 

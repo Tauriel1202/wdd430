@@ -1,19 +1,23 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, subscribeOn } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Contact } from './contact.model';
-import { MOCKCONTACTS } from './MOCKCONTACTS';
+// import { MOCKCONTACTS } from './MOCKCONTACTS';
 
 @Injectable()
 export class ContactService {
   contactSelectedEvent = new Subject<Contact>();
   contactChangedEvent = new Subject<Contact[]>();
   maxContactId!: number;
+  msgSenderEvent = new Subject<Contact>();
+
+  messageSender!: Contact;
 
   public contacts: Contact[] = [];
 
   constructor(private http: HttpClient) {
     // this.contacts = MOCKCONTACTS;
+    this.getContacts()
     this.maxContactId = this.getMaxId();
   }
 
@@ -45,22 +49,44 @@ export class ContactService {
       );
   }
 
-  // getContact(id: string) {
-  //   for (const i of this.contacts) {
-  //     if (i.id == id) {
-  //       console.log(i);
-  //       return i;
-  //     }
-  //   }
+  // getMsgSender(id: string) {
+  //   id = JSON.parse(JSON.stringify(id))
 
-  //   // return null!;
-  //   // }
-  //   return this.contacts[+id];
+  //   return this.http
+  //   .get<Contact>(
+  //     `https://wdd430ccms-3166b-default-rtdb.firebaseio.com/contacts/${id}/name.json`
+  //     )
+  //     .subscribe(
+  //       (res) => {
+  //         // console.log(res);
+  //         this.msgSenderEvent.next(res)
+  //         return res;
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
   // }
+
+  getMsgSender(id: string) {
+    this.getContacts();
+
+    return this.contacts[+id];
+  }
 
   getContact(id: string) {
     return this.contacts[+id];
   }
+
+  // getContact(id: string): Contact {
+  //   for (const contact of this.contacts) {
+  //     if (contact.id == id) {
+  //       //console.log("found!")
+  //       return contact;
+  //     }
+  //   }
+  //   return null!;
+  // }
 
   deleteContact(contact: Contact) {
     //   if (!contact) {
@@ -97,10 +123,11 @@ export class ContactService {
       let currentId = +this.contacts[c].id;
       if (currentId > maxId) {
         maxId = currentId;
+        // console/.log(maxId, 'Elves Rule!');
       }
     }
 
-    return maxId;
+    return (maxId += 1);
   }
 
   addContact(newContact: Contact) {
@@ -109,9 +136,10 @@ export class ContactService {
     }
 
     this.maxContactId;
+    // console.log(this.maxContactId);
     newContact.id = this.maxContactId.toString();
     this.contacts.push(newContact);
-    let contactLstClone = this.contacts.slice();
+    // let contactLstClone = this.contacts.slice();
     // this.contactChangedEvent.next(contactLstClone);
     this.storeContacts();
   }
