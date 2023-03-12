@@ -17,7 +17,7 @@ export class ContactService {
 
   constructor(private http: HttpClient) {
     // this.contacts = MOCKCONTACTS;
-    this.getContacts()
+    this.getContacts();
     this.maxContactId = this.getMaxId();
   }
 

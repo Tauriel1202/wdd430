@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Contact } from 'src/app/contacts/contact.model';
 import { ContactService } from 'src/app/contacts/contact.service';
@@ -39,8 +46,8 @@ export class MessageItemComponent implements OnInit, OnDestroy {
     this.messageSelected.emit();
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     // this.contactService.msgSenderEvent.unsubscribe()
-    this.subscr.unsubscribe()
+    this.subscr.unsubscribe();
   }
 }
