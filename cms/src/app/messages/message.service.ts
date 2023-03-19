@@ -21,7 +21,8 @@ export class msgService {
     // return this.msgs.slice();
     return this.http
       .get<Message[]>(
-        'https://wdd430ccms-3166b-default-rtdb.firebaseio.com/messages.json'
+        'http://localhost:4200/messages'
+        // 'https://wdd430ccms-3166b-default-rtdb.firebaseio.com/messages.json'
       )
       .subscribe(
         (msgs: Message[]) => {
@@ -67,13 +68,43 @@ export class msgService {
     return (maxId += 1);
   }
 
-  addMessage(message: Message) {
-    this.maxMsgId;
-    message.id = this.maxMsgId.toString()
-    this.msgs.push(message);
-    // this.messageChangedEvent.emit(this.msgs.slice());
-    console.log('The Elves are sending a message.');
-    this.storeMessage()
+  // addMessage(message: Message) {
+  //   this.maxMsgId;
+  //   message.id = this.maxMsgId.toString()
+  //   this.msgs.push(message);
+  //   // this.messageChangedEvent.emit(this.msgs.slice());
+  //   console.log('The Elves are sending a message.');
+  //   this.storeMessage()
+  // }
+
+  addMessage(newMsg: Message) {
+    let docsLstClone;
+    if (!newMsg) {
+      return;
+    }
+
+    newMsg.id = '';
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    this.http
+      .post<{ message: string; msg: Message }>(
+        'http://localhost:4200/messages',
+        Message,
+        { headers: headers }
+      )
+      .subscribe((responseData) => {
+        // add new document to documents
+        this.msgs.push(responseData.msg);
+        this.sortAndSend();
+      });
+
+    // this.maxDocId++;
+    // newDoc.id = this.maxDocId.toString();
+    // this.docs.push(newDoc);
+    // docsLstClone = this.docs.slice();
+    // this.documentChangedEvent.next(docsLstClone);
+    // this.storeDocs();
   }
 
   storeMessage() {
@@ -87,12 +118,26 @@ export class msgService {
 
     this.http
       .put<Message[]>(
-        'https://wdd430ccms-3166b-default-rtdb.firebaseio.com/messages.json',
+        'http://localhost:4200/messages',
+        // 'https://wdd430ccms-3166b-default-rtdb.firebaseio.com/messages.json',
         this.msgs,
         httpOptions
       )
       .subscribe((res) => {
         this.messageChangedEvent.next(this.msgs.slice());
       });
+  }
+
+  sortAndSend() {
+    this.msgs.sort((a, b) => {
+      if (a.id < b.id) {
+        return -1;
+      }
+      if (a.id > b.id) {
+        return 1;
+      }
+      return 0;
+    });
+    this.messageChangedEvent.next(this.msgs.slice());
   }
 }

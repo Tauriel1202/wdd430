@@ -1,3 +1,4 @@
+// use ng serve in one terminal and node server.js in the other
 // Get dependencies
 var express = require("express");
 var path = require("path");
@@ -5,6 +6,7 @@ var http = require("http");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var mongoose = require("mongoose");
 
 // import the routing file to handle the default (index) route
 var index = require("./server/routes/app");
@@ -15,6 +17,23 @@ const contactRoutes = require("./server/routes/contacts");
 const docRoutes = require("./server/routes/docs");
 
 var app = express(); // create an instance of express
+app.set("view engine", "mongoose");
+
+const cors = require("cors");
+app.use(cors());
+
+const env = require("dotenv");
+env.config();
+
+// establish a connection to the mongo database
+mongoose.set("strictQuery", false);
+mongoose.connect(process.env.MONGO, { useNewUrlParser: true }, (err, res) => {
+  if (err) {
+    console.log(`❌⛔🚫Connection failed: ${err}❌⛔🚫`);
+  } else {
+    console.log("😀 Connected to database! 😀");
+  }
+});
 
 // Tell express to use the following parsers for POST data
 app.use(bodyParser.json());
@@ -53,9 +72,9 @@ app.use(function (req, res, next) {
   res.render("index");
 });
 
-app.use("/msgs", msgRoutes);
+app.use("/messages", msgRoutes);
 app.use("/contacts", contactRoutes);
-app.use("/docs", docRoutes);
+app.use("/documents", docRoutes);
 
 // Tell express to map all other non-defined routes back to the index page
 app.get("*", (req, res) => {
@@ -63,7 +82,7 @@ app.get("*", (req, res) => {
 });
 
 // Define the port address and tell express to use this port
-const port = process.env.PORT || "3000";
+const port = process.env.PORT || "3000" || "4200";
 app.set("port", port);
 
 // Create HTTP server.

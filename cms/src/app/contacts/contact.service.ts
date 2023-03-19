@@ -25,7 +25,8 @@ export class ContactService {
     // return this.contacts.slice();
     return this.http
       .get<Contact[]>(
-        'https://wdd430ccms-3166b-default-rtdb.firebaseio.com/contacts.json'
+        '/contacts'
+        // 'https://wdd430ccms-3166b-default-rtdb.firebaseio.com/contacts.json'
       )
       .subscribe(
         (contacts: Contact[]) => {
@@ -88,32 +89,53 @@ export class ContactService {
   //   return null!;
   // }
 
+  // deleteContact(contact: Contact) {
+  //   //   if (!contact) {
+  //   //     return;
+  //   //   }
+  //   //   const pos = this.contacts.indexOf(contact);
+  //   //   if (pos < 0) {
+  //   //     return;
+  //   //   }
+  //   //   this.contacts.splice(pos, 1);
+  //   //   this.contactChangedEvent.emit(this.contacts.slice());
+
+  //   let pos, contactLstClone;
+
+  //   if (!contact) {
+  //     return;
+  //   }
+
+  //   pos = this.contacts.indexOf(contact);
+  //   if (pos < 0) {
+  //     return;
+  //   }
+
+  //   this.contacts.splice(pos, 1);
+  //   contactLstClone = this.contacts.slice();
+  //   // this.contactChangedEvent.next(contactLstClone);
+  //   this.storeContacts();
+  // }
+
   deleteContact(contact: Contact) {
-    //   if (!contact) {
-    //     return;
-    //   }
-    //   const pos = this.contacts.indexOf(contact);
-    //   if (pos < 0) {
-    //     return;
-    //   }
-    //   this.contacts.splice(pos, 1);
-    //   this.contactChangedEvent.emit(this.contacts.slice());
-
-    let pos, contactLstClone;
-
     if (!contact) {
       return;
     }
 
-    pos = this.contacts.indexOf(contact);
+    const pos = this.contacts.findIndex((c) => c.id === contact.id);
+
     if (pos < 0) {
       return;
     }
 
-    this.contacts.splice(pos, 1);
-    contactLstClone = this.contacts.slice();
-    // this.contactChangedEvent.next(contactLstClone);
-    this.storeContacts();
+    // delete from database
+    this.http
+      .delete('http://localhost:4200/contacts' + contact.id)
+      .subscribe((res) => {
+        console.log(res);
+        this.contacts.splice(pos, 1);
+        this.sortAndSend();
+      });
   }
 
   getMaxId() {
@@ -131,34 +153,62 @@ export class ContactService {
   }
 
   addContact(newContact: Contact) {
+    let docsLstClone;
     if (!newContact) {
       return;
     }
 
-    this.maxContactId;
-    // console.log(this.maxContactId);
-    newContact.id = this.maxContactId.toString();
-    this.contacts.push(newContact);
-    // let contactLstClone = this.contacts.slice();
-    // this.contactChangedEvent.next(contactLstClone);
-    this.storeContacts();
+    newContact.id = '';
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    this.http
+      .post<{ message: string; contact: Contact }>(
+        'http://localhost:4200/contacts',
+        Contact,
+        { headers: headers }
+      )
+      .subscribe((responseData) => {
+        // add new document to documents
+        this.contacts.push(responseData.contact);
+        this.sortAndSend();
+      });
+
+    // this.maxDocId++;
+    // newDoc.id = this.maxDocId.toString();
+    // this.docs.push(newDoc);
+    // docsLstClone = this.docs.slice();
+    // this.documentChangedEvent.next(docsLstClone);
+    // this.storeDocs();
   }
 
-  updateContact(origContact: Contact, newContact: Contact) {
-    if (!origContact || !newContact) {
+  updateContact(originalContact: Contact, newContact: Contact) {
+    if (!originalContact || !newContact) {
       return;
     }
 
-    let pos = this.contacts.indexOf(origContact);
+    const pos = this.contacts.findIndex((d) => d.id === originalContact.id);
+
     if (pos < 0) {
       return;
     }
 
-    newContact.id = origContact.id;
-    this.contacts[pos] = newContact;
-    let contactLstClone = this.contacts.slice();
-    // this.contactChangedEvent.next(contactLstClone);
-    this.storeContacts();
+    // set the id of the new Contact to the id of the old Contact
+    newContact.id = originalContact.id;
+    // newContact._id = originalContact._id;
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    // update database
+    this.http
+      .put('http://localhost:4200/contacts' + originalContact.id, newContact, {
+        headers: headers,
+      })
+      .subscribe((response) => {
+        console.log(`👍 ${response}`);
+        this.contacts[pos] = newContact;
+        this.sortAndSend();
+      });
   }
 
   storeContacts() {
@@ -172,7 +222,8 @@ export class ContactService {
 
     this.http
       .put<Contact[]>(
-        'https://wdd430ccms-3166b-default-rtdb.firebaseio.com/contacts.json',
+        'http://localhost:4200/contacts',
+        // 'https://wdd430ccms-3166b-default-rtdb.firebaseio.com/contacts.json',
         this.contacts,
         httpOptions
       )
@@ -180,5 +231,18 @@ export class ContactService {
         console.log(response);
         this.contactChangedEvent.next(this.contacts.slice());
       });
+  }
+
+  sortAndSend() {
+    this.contacts.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    });
+    this.contactChangedEvent.next(this.contacts.slice());
   }
 }
