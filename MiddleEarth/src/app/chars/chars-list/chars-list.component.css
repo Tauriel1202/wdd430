@@ -1,0 +1,28 @@
+* {
+  margin: auto;
+}
+h2 {
+  text-align: center;
+  padding: 1em;
+}
+.charsList {
+  margin-top: 2em;
+  border: 2px solid #999;
+  background-color: #f8f6f1;
+  width: 50em;
+}
+.listTop {
+  border: 2px solid #999;
+  display: flex;
+}
+.listTop h2 {
+  margin-right: 2em;
+}
+.newBtn {
+  border: 2px solid #00704d;
+  border-radius: 10px;
+  background-color: #007a54;
+  color: #f8f6f1;
+  padding: 1em;
+  margin-right: 2em;
+}

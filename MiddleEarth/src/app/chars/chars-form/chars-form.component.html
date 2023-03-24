@@ -1,1 +1,73 @@
-<p>chars-form works!</p>
+<div class="editForm">
+  <!-- Form needs to look like this later:  -->
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-group">
+      <label
+        >Name:
+        <input
+          type="text"
+          id="name"
+          class="form-control required"
+          size="120"
+          max="120"
+          [ngModel]="char?.name"
+          name="name"
+          #name="ngModel"
+          required
+      /></label>
+      <label
+        >Species:
+        <input
+          type="text"
+          id="species"
+          class="form-control required"
+          size="120"
+          max="120"
+          [ngModel]="char?.species"
+          name="species"
+          #species="ngModel"
+          required
+      /></label>
+      <label
+        >Land:
+        <input
+          type="text"
+          id="land"
+          class="form-control"
+          size="120"
+          max="120"
+          [ngModel]="char?.land"
+          name="land"
+          #land="ngModel"
+      /></label>
+      <label
+        >Role:
+        <input
+          type="text"
+          id="role"
+          class="form-control"
+          size="120"
+          max="120"
+          [ngModel]="char?.role"
+          name="role"
+          #role="ngModel"
+      /></label>
+      <label
+        >Image:
+        <input
+          type="text"
+          id="imgUrl"
+          class="form-control"
+          size="150"
+          max="255"
+          [ngModel]="char?.imgUrl"
+          name="imgUrl"
+          #imgUrl="ngModel"
+      /></label>
+    </div>
+    <div class="formBtns">
+      <button type="submit" [disabled]="!f.valid">Save</button>
+      <button type="button">Cancel</button>
+    </div>
+  </form>
+</div>

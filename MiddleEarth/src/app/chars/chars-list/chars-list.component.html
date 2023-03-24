@@ -1,1 +1,28 @@
-<p>chars-list works!</p>
+<!-- <div class="panel panel-default charsList"> -->
+<div class="charsList">
+  <!-- <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="row"> -->
+  <div class="title listTop">
+    <h2>Characters</h2>
+    <a class="newBtn" [routerLink]="['new']">Add a Character</a>
+    <!-- </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <div class="panel-body listBody">
+    <div class="row">
+      <div class="col-xs-12">
+        <app-char-item
+          *ngFor="let c of chars; let i = index"
+          [char]="c"
+          [index]="i"
+        ></app-char-item>
+      </div>
+    </div>
+  </div>
+</div>
