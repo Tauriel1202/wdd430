@@ -1,0 +1,40 @@
+{
+  "chars": [
+    {
+      "id": 0,
+      "name": "Galadriel Felagund",
+      "species": "Elf",
+      "land": "Lothlorien",
+      "imgUrl": "../../assets/images/galadrielShip.jpg",
+      "role": "Strategizing and aiding the defeat of Sauron",
+      "family": []
+    },
+    {
+      "id": 1,
+      "name": "Tauriel Greenleaf",
+      "species": "Elf",
+      "land": "Mirkwood",
+      "imgUrl": "../../assets/images/taurielBow.jpg",
+      "role": "Encouraging Legolas to fight.",
+      "family": null
+    },
+    {
+      "id": 2,
+      "name": "Elrond Half-Elven",
+      "species": "Elf",
+      "land": "Imladris",
+      "imgUrl": "../../assets/images/elrondContact.jpg",
+      "role": "Leader of Imladris",
+      "family": null
+    },
+    {
+      "id": 3,
+      "name": "Legolas Greenleaf",
+      "species": "Elf",
+      "land": "Mirkwood",
+      "imgUrl": "../../assets/images/legolas.jpg",
+      "role": "Part of the Fellowship and assisted in the War of the Ring",
+      "family": null
+    }
+  ]
+}

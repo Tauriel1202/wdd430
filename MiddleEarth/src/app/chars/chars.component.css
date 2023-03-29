@@ -1,0 +1,16 @@
+.chars {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  margin: 0 15em;
+  column-gap: 15px;
+}
+
+.charListDiv {
+  margin-left: 10em;
+}
+
+.charDeets {
+  margin-top: 2em;
+  min-width: 450px;
+  max-width: 500px;
+}

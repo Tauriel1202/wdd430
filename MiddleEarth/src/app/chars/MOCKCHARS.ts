@@ -8,7 +8,6 @@ export const MOCKCHARS: Char[] = [
     land: 'Lothlorien',
     imgUrl: '../../assets/images/galadrielShip.jpg',
     role: 'Strategizing and aiding the defeat of Sauron',
-    family: [],
   },
   {
     id: 1,
@@ -17,7 +16,6 @@ export const MOCKCHARS: Char[] = [
     land: 'Mirkwood',
     imgUrl: '../../assets/images/taurielBow.jpg',
     role: 'Encouraging Legolas to fight.',
-    family: null,
   },
   {
     id: 2,
@@ -26,7 +24,6 @@ export const MOCKCHARS: Char[] = [
     land: 'Imladris',
     imgUrl: '../../assets/images/elrondContact.jpg',
     role: 'Leader of Imladris',
-    family: null,
   },
   {
     id: 3,
@@ -35,6 +32,5 @@ export const MOCKCHARS: Char[] = [
     land: 'Mirkwood',
     imgUrl: '../../assets/images/legolas.jpg',
     role: 'Part of the Fellowship and assisted in the War of the Ring',
-    family: null,
   },
 ];

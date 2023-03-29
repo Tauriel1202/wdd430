@@ -1,7 +1,14 @@
-<div class="item">
-  <a routerLink="active"></a>
-  <h3 class="name">Name Here</h3>
-  <div class="itemImg">
-    <img src="" alt="" width="100" height="100" class="img-responsive" />
+<a [routerLink]="[index]" routerLinkActive="active" class="charItemA">
+  <div class="item">
+    <div class="itemImg">
+      <img
+      src="{{ char.imgUrl }}"
+      alt="{{ char.name }}"
+      width="100"
+      height="100"
+      class="img-responsive"
+      />
+    </div>
+    <h3 class="name">{{ char.name }}</h3>
   </div>
-</div>
+</a>

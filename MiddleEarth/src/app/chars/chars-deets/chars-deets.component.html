@@ -1,17 +1,25 @@
 <div class="deets">
-  <h3 class="name"></h3>
   <div class="deetBtns">
+    <h3 class="name">{{ char.name }}</h3>
     <button routerLink="edit">Edit</button>
-    <button>Delete</button>
-  </div>
-  <div class="imgDiv">
-    <img src="" alt="" width="100" height="100" class="img-responsive" />
+    <button (click)="onDelete()">Delete</button>
   </div>
   <div class="otherDeets">
-    <h4>Species:</h4>
-    <h4>Land:</h4>
-    <h4>Role:</h4>
-    <!-- <h4>Family:</h4> -->
-    <!-- This one is debatable... -->
+    <div class="imgDiv">
+      <img
+        src="{{ char.imgUrl }}"
+        alt="{{ char.name }}"
+        width="100"
+        height="100"
+        class="img-responsive"
+      />
+    </div>
+    <div class="textDeets">
+      <h4>Species: {{ char.species }}</h4>
+      <h4>Land: {{ char.land }}</h4>
+      <h4>Role: {{ char.role }}</h4>
+      <!-- <h4>Family:</h4> -->
+      <!-- This one is debatable... -->
+    </div>
   </div>
 </div>

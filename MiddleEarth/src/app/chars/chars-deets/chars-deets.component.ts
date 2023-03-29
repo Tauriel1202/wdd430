@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Char } from '../chars.model';
 import { CharService } from '../chars.service';
 
@@ -10,6 +10,7 @@ import { CharService } from '../chars.service';
 })
 export class CharsDeetsComponent implements OnInit {
   char!: Char;
+  id!: number;
 
   constructor(
     private charService: CharService,
@@ -22,6 +23,19 @@ export class CharsDeetsComponent implements OnInit {
       'The Elves are in the Char Details, and they are partying On-In-It!'
     );
 
-    
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['id'];
+      this.char = this.charService.getChar(this.id);
+    });
+  }
+
+  onDelete() {
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['id'];
+      
+      this.charService.deleteChar(this.id);
+      console.log('The Elves have deleted the selected Char.');
+      this.router.navigate(['/chars'], { relativeTo: this.route });
+    });
   }
 }

@@ -1,68 +1,68 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { map, Subject } from 'rxjs';
 import { Char } from './chars.model';
-import { MOCKCHARS } from './MOCKCHARS';
 
 @Injectable()
 export class CharService {
   selectedEvent = new Subject<Char>();
   changedEvent = new Subject<Char[]>();
-  maxCharId: number;
+  // maxCharId: number;
 
   public chars: Char[] = [];
 
   constructor(private http: HttpClient) {
-    this.chars = MOCKCHARS;
-    this.getChars();
-    this.maxCharId = this.getMaxId();
+    // this.maxCharId = this.getMaxId();
   }
 
   getChars() {
-    return this.http.get<Char[]>('/chars').subscribe(
-      (chars: Char[]) => {
-        console.log(chars);
-        this.chars = chars;
-        this.changedEvent.next(this.chars.slice());
-      },
-      (e: any) => {
-        console.log(e);
-      }
-    );
+    this.http
+      .get<{ message: string; chars: Char[] }>('http://localhost:3000/chars')
+      .pipe(
+        map((data) => {
+          return data.chars.map((char) => {
+            return {
+              id: char.id,
+              imgUrl: char.imgUrl, 
+              land: char.land,
+              name: char.name,
+              role: char.role,
+              species: char.species
+            };
+          });
+        })
+      )
+      .subscribe((charData) => {
+        this.chars = charData;
+        this.changedEvent.next([...this.chars]);
+      });
   }
 
   getChar(id: number) {
     return this.chars[id];
   }
 
-  getMaxId() {
-    let maxId = 0;
+  // getMaxId() {
+  //   let maxId = 0;
 
-    for (let c in this.chars) {
-      let currentId = +this.chars[c].id;
-      if (currentId > maxId) {
-        maxId = currentId;
-      }
-    }
+  //   for (let c in this.chars) {
+  //     let currentId = +this.chars[c].id;
+  //     if (currentId > maxId) {
+  //       maxId = currentId;
+  //     }
+  //   }
 
-    return (maxId += 1);
-  }
+  //   return (maxId += 1);
+  // }
 
   addChar(newChar: Char) {
-    if (!newChar) {
-      return;
-    }
-
-    newChar.id;
-
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
+    const char: Char = newChar;
     this.http
-      .post<Char>('/chars', Char, { headers: headers })
-      .subscribe((res) => {
-        console.log(res);
-        this.chars.push(res);
-        this.changedEvent.next(this.chars.slice());
+      .post<{ message: string }>('http://localhost:3000/chars', char)
+      .subscribe((resData) => {
+        console.log(resData.message);
+        this.chars.push(char);
+        this.changedEvent.next([...this.chars]);
       });
   }
 
@@ -79,12 +79,18 @@ export class CharService {
 
     newChar.id = orig.id;
 
+    this.chars = JSON.parse(JSON.stringify(this.chars));
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
+    console.log('The Elves are editting the chars.');
+
     this.http
-      .put(`/chars/${orig.id}`, newChar, {
-        headers: headers,
-      })
+      .put<Char[]>(
+        `https://middleearth-d033c-default-rtdb.firebaseio.com/chars.json` +
+          orig.id,
+        newChar,
+        { headers: headers }
+      )
       .subscribe((response) => {
         console.log(`👍 ${response}`);
         this.chars[pos] = newChar;
@@ -92,23 +98,18 @@ export class CharService {
       });
   }
 
-  deleteChar(char: Char) {
-    if (!char) {
-      return;
-    }
+  deleteChar(id: number) {
+    // let charId = this.chars[id]
+    console.log(id)
 
-    const pos = this.chars.findIndex((c) => {
-      c.id === char.id;
-    });
-
-    if (pos < 0) {
-      return;
-    }
-
-    this.http.delete(`/chars/${char.id}`).subscribe((res) => {
-      console.log(`${char.name} deleted! ${res}`);
-      this.chars.splice(pos, 1);
-      this.changedEvent.next(this.chars.slice());
-    });
+    this.http
+      .delete<{message: string}>(
+        `http://localhost:3000/chars/` + id
+      )
+      .subscribe((res) => {
+        console.log(res.message)
+        console.log(`Deleted!`);
+        this.changedEvent.next(this.chars.slice());
+      });
   }
 }

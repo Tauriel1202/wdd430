@@ -1,6 +1,5 @@
 export class Char {
   constructor(
-    public family: Char[] | null,
     public id: number,
     public imgUrl: string,
     public land: string,

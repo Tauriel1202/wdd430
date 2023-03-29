@@ -1,9 +1,8 @@
 <div class="editForm">
-  <!-- Form needs to look like this later:  -->
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class="form-group">
       <label
-        >Name:
+        >Name: 
         <input
           type="text"
           id="name"
@@ -64,10 +63,22 @@
           name="imgUrl"
           #imgUrl="ngModel"
       /></label>
+      <!-- <label
+        >Family:
+        <input
+          type="text"
+          id="family"
+          class="form-control"
+          size="150"
+          max="255"
+          [ngModel]="char?.family"
+          name="family"
+          #family="ngModel"
+      /></label> -->
     </div>
     <div class="formBtns">
       <button type="submit" [disabled]="!f.valid">Save</button>
-      <button type="button">Cancel</button>
+      <button type="button" (click)="onCancel()">Cancel</button>
     </div>
   </form>
 </div>

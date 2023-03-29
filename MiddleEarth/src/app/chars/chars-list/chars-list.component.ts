@@ -18,6 +18,7 @@ export class CharsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.charService.getChars();
     this.subscr = this.charService.changedEvent.subscribe((chars: Char[]) => {
       this.chars = chars;
     });
