@@ -7,12 +7,12 @@ import { Char } from './chars.model';
 export class CharService {
   selectedEvent = new Subject<Char>();
   changedEvent = new Subject<Char[]>();
-  // maxCharId: number;
+  maxCharId: number;
 
   public chars: Char[] = [];
 
   constructor(private http: HttpClient) {
-    // this.maxCharId = this.getMaxId();
+    this.maxCharId = this.getMaxId();
   }
 
   getChars() {
@@ -23,11 +23,11 @@ export class CharService {
           return data.chars.map((char) => {
             return {
               id: char.id,
-              imgUrl: char.imgUrl, 
+              imgUrl: char.imgUrl,
               land: char.land,
               name: char.name,
               role: char.role,
-              species: char.species
+              species: char.species,
             };
           });
         })
@@ -42,21 +42,23 @@ export class CharService {
     return this.chars[id];
   }
 
-  // getMaxId() {
-  //   let maxId = 0;
+  getMaxId() {
+    let maxId = 0;
 
-  //   for (let c in this.chars) {
-  //     let currentId = +this.chars[c].id;
-  //     if (currentId > maxId) {
-  //       maxId = currentId;
-  //     }
-  //   }
+    for (let c in this.chars) {
+      let currentId = +this.chars[c].id;
+      if (currentId > maxId) {
+        maxId = currentId;
+      }
+    }
 
-  //   return (maxId += 1);
-  // }
+    return (maxId += 1);
+  }
 
   addChar(newChar: Char) {
     const char: Char = newChar;
+    newChar.id = this.maxCharId;
+
     this.http
       .post<{ message: string }>('http://localhost:3000/chars', char)
       .subscribe((resData) => {
@@ -98,18 +100,33 @@ export class CharService {
       });
   }
 
-  deleteChar(id: number) {
+  deleteChar(char: Char) {
     // let charId = this.chars[id]
-    console.log(id)
+    // console.log(id)
+
+    // this.http
+    //   .delete<{message: string}>(
+    //     `http://localhost:3000/chars/` + id
+    //   )
+    //   .subscribe((res) => {
+    //     console.log(res.message)
+    //     console.log(`Deleted!`);
+    //     this.changedEvent.next(this.chars.slice());
+    //   });
+    // this.http
+    //   .delete<{ message: string }>(`http://localhost:3000/chars/` + id)
+    //   .subscribe(() => {
+    //     console.log('Deleted!')
+    //   });
+
+    const pos = this.chars.findIndex((c) => c.id);
 
     this.http
-      .delete<{message: string}>(
-        `http://localhost:3000/chars/` + id
-      )
+      .delete<{ message: string }>(`http://localhost:3000/chars/` + char.id)
       .subscribe((res) => {
-        console.log(res.message)
-        console.log(`Deleted!`);
-        this.changedEvent.next(this.chars.slice());
+        console.log(`💩💩 ${res} 💩💩`);
+        this.chars.splice(pos, 1);
+        this.changedEvent.next(this.chars.slice())
       });
   }
 }

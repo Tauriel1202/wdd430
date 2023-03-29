@@ -11,6 +11,7 @@ import { CharService } from '../chars.service';
 export class CharsDeetsComponent implements OnInit {
   char!: Char;
   id!: number;
+  name!: string;
 
   constructor(
     private charService: CharService,
@@ -30,12 +31,15 @@ export class CharsDeetsComponent implements OnInit {
   }
 
   onDelete() {
-    this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
+    // this.route.params.subscribe((params: Params) => {
+    //   this.id = params['id'];
       
-      this.charService.deleteChar(this.id);
-      console.log('The Elves have deleted the selected Char.');
-      this.router.navigate(['/chars'], { relativeTo: this.route });
-    });
+    //   this.charService.deleteChar(this.id);
+    //   console.log('The Elves have deleted the selected Char.');
+    //   this.router.navigate(['/chars'], { relativeTo: this.route });
+    // });
+    this.charService.deleteChar(this.char);
+    console.log('The Elves have deleted the selected Char.')
+    this.router.navigate(['/chars'], {relativeTo: this.route})
   }
 }

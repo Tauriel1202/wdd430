@@ -6,6 +6,7 @@ const Char = require("./models/char");
 const app = express();
 
 const dotenv = require("dotenv");
+const { ObjectId } = require("mongodb");
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URI);
@@ -50,12 +51,20 @@ app.get("/chars", (req, res, next) => {
   });
 });
 
-app.delete('/chars/:id', (req, res, next)=>{
-  Char.deleteOne({id: req.params.id}).then(() => {
-    // console.log(result)
-    console.log(`Char ${req.params.id} was deleted!`)
-    res.status(200).json({message: 'Char deleted!'})
-  })
-})
+app.delete("/chars/:id", (req, res, next) => {
+  // Char.deleteOne({id: req.params.id}).then(() => {
+  //   console.log("💩", req.params.id)
+  //   // console.log(`Char ${req.params.id} was deleted!`)
+  //   res.status(200).json({message: 'Char deleted!'})
+  // })
+
+  Char.findOne({ id: req.params.id }).then((char) => {
+    Char.deleteOne({ id: req.params.id }).then((res) => {
+      res.status(204).json({
+        message: "Char deleted! 💩💩💩",
+      });
+    });
+  });
+});
 
 module.exports = app;
