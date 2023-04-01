@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 
-const charSchema = mongoose.Schema({
-  // id: { type: Number },
-  charId: { type: String, required: true },
+const enemySchema = mongoose.Schema({
+  enemyId: { type: String, required: true },
   imgUrl: { type: String },
   land: { type: String },
   name: { type: String, required: true },
@@ -10,4 +9,4 @@ const charSchema = mongoose.Schema({
   species: { type: String },
 });
 
-module.exports = mongoose.model("Char", charSchema);
+module.exports = mongoose.model("Enemy", enemySchema);

@@ -2,7 +2,7 @@
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class="form-group">
       <label
-        >Name: 
+        >Name:
         <input
           type="text"
           id="name"
@@ -19,13 +19,12 @@
         <input
           type="text"
           id="species"
-          class="form-control required"
+          class="form-control"
           size="120"
           max="120"
           [ngModel]="char?.species"
           name="species"
           #species="ngModel"
-          required
       /></label>
       <label
         >Land:
@@ -63,18 +62,19 @@
           name="imgUrl"
           #imgUrl="ngModel"
       /></label>
-      <!-- <label
-        >Family:
+      <label
+        >Character Id:
         <input
           type="text"
-          id="family"
+          id="charId"
           class="form-control"
           size="150"
           max="255"
-          [ngModel]="char?.family"
-          name="family"
-          #family="ngModel"
-      /></label> -->
+          [ngModel]="char?.charId"
+          name="charId"
+          #charId="ngModel"
+          required
+      /></label>
     </div>
     <div class="formBtns">
       <button type="submit" [disabled]="!f.valid">Save</button>

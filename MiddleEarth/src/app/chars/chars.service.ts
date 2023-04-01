@@ -7,22 +7,22 @@ import { Char } from './chars.model';
 export class CharService {
   selectedEvent = new Subject<Char>();
   changedEvent = new Subject<Char[]>();
-  maxCharId: number;
 
   public chars: Char[] = [];
 
-  constructor(private http: HttpClient) {
-    this.maxCharId = this.getMaxId();
-  }
+  constructor(private http: HttpClient) {}
 
   getChars() {
     this.http
       .get<{ message: string; chars: Char[] }>('http://localhost:3000/chars')
       .pipe(
         map((data) => {
+          console.log('E: ', data.chars.length);
+          console.log('F: ', data.chars);
           return data.chars.map((char) => {
             return {
               id: char.id,
+              charId: char.charId,
               imgUrl: char.imgUrl,
               land: char.land,
               name: char.name,
@@ -38,95 +38,57 @@ export class CharService {
       });
   }
 
+  getLength() {
+    return this.chars.length;
+  }
+
   getChar(id: number) {
     return this.chars[id];
   }
 
-  getMaxId() {
-    let maxId = 0;
-
-    for (let c in this.chars) {
-      let currentId = +this.chars[c].id;
-      if (currentId > maxId) {
-        maxId = currentId;
-      }
-    }
-
-    return (maxId += 1);
-  }
-
   addChar(newChar: Char) {
     const char: Char = newChar;
-    newChar.id = this.maxCharId;
 
     this.http
-      .post<{ message: string }>('http://localhost:3000/chars', char)
+      .post<{ message: string; cId: string }>(
+        'http://localhost:3000/chars',
+        char
+      )
       .subscribe((resData) => {
-        console.log(resData.message);
+        console.log('C: ', resData.message);
+        const id = resData.cId;
+        char.id = id;
         this.chars.push(char);
         this.changedEvent.next([...this.chars]);
       });
   }
 
   updateChar(orig: Char, newChar: Char) {
-    if (!orig || !newChar) {
-      return;
-    }
-
-    const pos = this.chars.findIndex((c) => c.id === orig.id);
+    const pos = this.chars.findIndex((c) => c.charId === orig.charId);
 
     if (pos < 0) {
       return;
     }
 
-    newChar.id = orig.id;
-
-    this.chars = JSON.parse(JSON.stringify(this.chars));
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
+    console.log('🧝‍♀️', newChar);
     console.log('The Elves are editting the chars.');
 
     this.http
-      .put<Char[]>(
-        `https://middleearth-d033c-default-rtdb.firebaseio.com/chars.json` +
-          orig.id,
-        newChar,
-        { headers: headers }
-      )
+      .put<Char[]>(`http://localhost:3000/chars/` + orig.charId, newChar)
       .subscribe((response) => {
-        console.log(`👍 ${response}`);
+        console.log('👍', response);
         this.chars[pos] = newChar;
         this.changedEvent.next(this.chars.slice());
       });
   }
 
-  deleteChar(char: Char) {
-    // let charId = this.chars[id]
-    // console.log(id)
-
-    // this.http
-    //   .delete<{message: string}>(
-    //     `http://localhost:3000/chars/` + id
-    //   )
-    //   .subscribe((res) => {
-    //     console.log(res.message)
-    //     console.log(`Deleted!`);
-    //     this.changedEvent.next(this.chars.slice());
-    //   });
-    // this.http
-    //   .delete<{ message: string }>(`http://localhost:3000/chars/` + id)
-    //   .subscribe(() => {
-    //     console.log('Deleted!')
-    //   });
-
-    const pos = this.chars.findIndex((c) => c.id);
-
+  deleteChar(char: Char, id: number) {
+    console.log(char);
     this.http
-      .delete<{ message: string }>(`http://localhost:3000/chars/` + char.id)
+      .delete<{ message: string }>('http://localhost:3000/chars/' + char.charId)
       .subscribe((res) => {
-        console.log(`💩💩 ${res} 💩💩`);
-        this.chars.splice(pos, 1);
-        this.changedEvent.next(this.chars.slice())
+        // this.chars.splice(pos, 1);
+        this.changedEvent.next(this.chars.slice());
       });
   }
 }

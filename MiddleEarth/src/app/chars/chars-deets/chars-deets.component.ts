@@ -31,15 +31,20 @@ export class CharsDeetsComponent implements OnInit {
   }
 
   onDelete() {
-    // this.route.params.subscribe((params: Params) => {
-    //   this.id = params['id'];
-      
-    //   this.charService.deleteChar(this.id);
-    //   console.log('The Elves have deleted the selected Char.');
-    //   this.router.navigate(['/chars'], { relativeTo: this.route });
-    // });
-    this.charService.deleteChar(this.char);
-    console.log('The Elves have deleted the selected Char.')
-    this.router.navigate(['/chars'], {relativeTo: this.route})
+    this.route.data.subscribe((params: Params) => {
+      this.id = params['charId'];
+      console.log('💩💩💩💩', this.id);
+
+      //   this.charService.deleteChar(this.id);
+      //   console.log('The Elves have deleted the selected Char.');
+      //   this.router.navigate(['/chars'], { relativeTo: this.route });
+      // });
+      this.charService.deleteChar(this.char, this.id);
+      console.log('The Elves have deleted the selected Char.');
+      this.router.navigate(['/chars'], { relativeTo: this.route }).then(() => {
+        window.location.reload();
+        // this.charService.getChars();
+      });
+    });
   }
 }

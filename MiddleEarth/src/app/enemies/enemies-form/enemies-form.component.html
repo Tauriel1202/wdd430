@@ -1,7 +1,5 @@
 <div class="editForm">
-  <!-- Form needs to look like this later: 
-    <form (ngSubmit)="onSubmit(f)" #f='ngForm>' -->
-  <form>
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class="form-group">
       <label
         >Name:
@@ -11,7 +9,7 @@
           class="form-control required"
           size="120"
           max="120"
-          [ngModel]
+          [ngModel]="enemy?.name"
           name="name"
           #name="ngModel"
           required
@@ -21,13 +19,12 @@
         <input
           type="text"
           id="species"
-          class="form-control required"
+          class="form-control"
           size="120"
           max="120"
-          [ngModel]
+          [ngModel]="enemy?.species"
           name="species"
           #species="ngModel"
-          required
       /></label>
       <label
         >Land:
@@ -37,7 +34,7 @@
           class="form-control"
           size="120"
           max="120"
-          [ngModel]
+          [ngModel]="enemy?.land"
           name="land"
           #land="ngModel"
       /></label>
@@ -49,7 +46,7 @@
           class="form-control"
           size="120"
           max="120"
-          [ngModel]
+          [ngModel]="enemy?.role"
           name="role"
           #role="ngModel"
       /></label>
@@ -61,14 +58,28 @@
           class="form-control"
           size="150"
           max="255"
-          [ngModel]
+          [ngModel]="enemy?.imgUrl"
           name="imgUrl"
           #imgUrl="ngModel"
       /></label>
+      <label>
+        Enemy id:
+        <input
+          type="text"
+          id="enemyId"
+          class="form-control"
+          size="150"
+          max="255"
+          [ngModel]="enemy?.enemyId"
+          name="enemyId"
+          #enemyId="ngModel"
+          required
+        />
+      </label>
     </div>
     <div class="formBtns">
-      <button type="submit">Save</button>
-      <button type="button">Cancel</button>
+      <button type="submit" [disabled]="!f.valid">Save</button>
+      <button type="button" (click)="onCancel()">Cancel</button>
     </div>
   </form>
 </div>

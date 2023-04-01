@@ -14,7 +14,6 @@ export class CharsFormComponent implements OnInit {
   @ViewChild('f') charForm!: NgForm;
   origChar!: Char;
   char!: Char;
-  // family: Char[] = []
   id!: number;
   subscr!: Subscription;
   editMode: boolean = false;
@@ -40,41 +39,43 @@ export class CharsFormComponent implements OnInit {
 
       this.editMode = true;
       this.char = JSON.parse(JSON.stringify(this.origChar));
-
-      // if (this.char.family) {
-      // this.family = JSON.parse(JSON.stringify(this.char.family));
-      // }
     });
   }
 
   onSubmit(form: NgForm) {
     const value = form.value;
+    console.log('D: ', value);
+
+    let index = this.charService.getLength();
     const newChar = new Char(
       value.id,
+      value.charId,
       value.imgUrl,
       value.land,
       value.name,
       value.role,
-      value.species,
+      value.species
     );
     if (this.editMode) {
       this.charService.updateChar(this.origChar, newChar);
+      this.router.navigate(['/chars']).then(() => {
+        window.location.reload();
+      });
     } else {
       this.charService.addChar(newChar);
+      this.router.navigate(['/chars']);
     }
-    form.resetForm();
+  }
+
+  onCancel() {
     this.router.navigate(['/chars']);
   }
 
-  onCancel(){
-    this.router.navigate(['/chars'])
-  }
-
-  isInvalidCcontact(newChar: Char){
-    if (!newChar){
+  isInvalidChar(newChar: Char) {
+    if (!newChar) {
       return true;
     }
-    if (this.char && newChar.id === this.char.id){
+    if (this.char && newChar.id === this.char.id) {
       return true;
     }
     // for (let i = 0; i< this.family.length; i++){

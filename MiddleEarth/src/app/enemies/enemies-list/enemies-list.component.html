@@ -1,25 +1,28 @@
 <!-- <div class="panel panel-default charsList"> -->
-  <div class="enemiesList">
-    <!-- <div class="row">
+<div class="enemiesList">
+  <!-- <div class="row">
       <div class="col-xs-12">
         <div class="panel panel-default">
           <div class="panel-heading">
             <div class="row"> -->
-    <div class="title listTop">
-      <h2>Enemies</h2>
-      <a class="newBtn" [routerLink]="['new']">Add a Enemy</a>
-      <!-- </div>
+  <div class="title listTop">
+    <h2>Enemies</h2>
+    <a class="newBtn" [routerLink]="['new']">Add a Enemy</a>
+    <!-- </div>
             </div>
           </div>
         </div>
       </div> -->
-    </div>
-    <div class="panel-body listBody">
-      <div class="row">
-        <div class="col-xs-12">
-          <app-enemy-item></app-enemy-item>
-        </div>
+  </div>
+  <div class="panel-body listBody">
+    <div class="row">
+      <div class="col-xs-12">
+        <app-enemy-item
+          *ngFor="let e of enemies; let i = index"
+          [enemy]="e"
+          [index]="i"
+        ></app-enemy-item>
       </div>
     </div>
   </div>
-  
+</div>

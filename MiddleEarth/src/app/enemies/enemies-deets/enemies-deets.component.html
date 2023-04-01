@@ -1,15 +1,23 @@
 <div class="deets">
-  <h3 class="name"></h3>
   <div class="deetBtns">
+    <h3 class="name">{{ enemy.name }}</h3>
     <button routerLink="edit">Edit</button>
-    <button>Delete</button>
-  </div>
-  <div class="imgDiv">
-    <img src="" alt="" width="100" height="100" class="img-responsive" />
+    <button (click)="onDelete()">Delete</button>
   </div>
   <div class="otherDeets">
-    <h4>Species:</h4>
-    <h4>Land:</h4>
-    <h4>Role:</h4>
+    <div class="imgDiv">
+      <img
+        src="{{ enemy.imgUrl }}"
+        alt="{{ enemy.name }}"
+        width="100"
+        height="100"
+        class="img-responsive"
+      />
+    </div>
+    <div class="textDeets">
+      <h4>Species:{{ enemy.species }}</h4>
+      <h4>Land: {{ enemy.land }}</h4>
+      <h4>Role: {{ enemy.role }}</h4>
+    </div>
   </div>
 </div>

@@ -7,6 +7,7 @@ const app = express();
 
 const dotenv = require("dotenv");
 const { ObjectId } = require("mongodb");
+const Enemy = require("./models/enemy");
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URI);
@@ -28,8 +29,10 @@ app.use((req, res, next) => {
 });
 
 app.post("/chars", (req, res, next) => {
+  console.log("B: ", req.body);
   const char = new Char({
     id: req.body.id,
+    charId: req.body.charId,
     imgUrl: req.body.imgUrl,
     land: req.body.land,
     name: req.body.name,
@@ -37,8 +40,10 @@ app.post("/chars", (req, res, next) => {
     species: req.body.species,
   });
   console.log(char);
-  char.save();
-  res.status(201).json({ message: "Char added! 💩" });
+  char.save().then((result) => {
+    console.log("R: ", result);
+    res.status(201).json({ message: "Char added! 💩", cId: result._id });
+  });
 });
 
 app.get("/chars", (req, res, next) => {
@@ -51,19 +56,72 @@ app.get("/chars", (req, res, next) => {
   });
 });
 
-app.delete("/chars/:id", (req, res, next) => {
+app.put("/chars/:charId", (req, res, next) => {
+  // console.log("PUT ID: ", req.params.charId);
+  // // Char.findOne({charId: req.params.charId}).then((char)=>{
+  const char = new Char({
+    _id: req.body.id,
+    charId: req.body.charId,
+    imgUrl: req.body.imgUrl,
+    land: req.body.land,
+    name: req.body.name,
+    role: req.body.role,
+    species: req.body.species,
+  });
+  Char.deleteOne({ charId: req.params.charId }).then(() => {
+    Char.updateOne({ charId: req.params.charId, char }).then((result) => {
+      //   console.log("Update in progress: ", result);
+      //   // char.();
+      //   // })
+      char.save(result);
+      res.status(200).json({ message: "Char Updated!" });
+    });
+  });
+});
+
+app.delete("/chars/:charId", (req, res, next) => {
   // Char.deleteOne({id: req.params.id}).then(() => {
   //   console.log("💩", req.params.id)
   //   // console.log(`Char ${req.params.id} was deleted!`)
   //   res.status(200).json({message: 'Char deleted!'})
   // })
-
-  Char.findOne({ id: req.params.id }).then((char) => {
-    Char.deleteOne({ id: req.params.id }).then((res) => {
+  console.log("A:  ", req.params.charId, "END");
+  Char.findOne({ charId: req.params.charId }).then((char) => {
+    Char.deleteOne({ charId: req.params.charId }).then(() => {
+      console.log("💩💩💩💩💩💩💩" + req.params.charId);
       res.status(204).json({
         message: "Char deleted! 💩💩💩",
       });
     });
+  });
+});
+
+//Enemy paths
+app.get("/enemies", (req, res, next) => {
+  Enemy.find().then((data) => {
+    console.log(data);
+    res.status(200).json({
+      message: "Enemies fetched!",
+      enemies: data,
+    });
+  });
+});
+
+app.post("/enemies", (req, res, next) => {
+  const enemy = new Enemy({
+    id: req.body.id,
+    enemyId: req.body.enemyId,
+    imgUrl: req.body.imgUrl,
+    land: req.body.land,
+    name: req.body.name,
+    role: req.body,
+    species: req.body.species,
+  });
+
+  console.log(enemy);
+  enemy.save().then((result) => {
+    console.log("R: ", result);
+    res.status(201).json({ message: "Enemy found! 💩", eId: result._id });
   });
 });
 
