@@ -1,1 +1,12 @@
-<p>lands-list works!</p>
+<div class="landsList">
+  <div class="title listTop">
+    <h2>Lands</h2>
+  </div>
+  <div class="panel-body listBody">
+    <div class="row">
+      <div class="col-xs-12">
+        <app-land-item *ngFor="let l of lands" [land]="l"></app-land-item>
+      </div>
+    </div>
+  </div>
+</div>

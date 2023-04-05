@@ -6,6 +6,10 @@
   color: #f8f6f1;
 }
 
+li.activeLink.active a {
+  color: black;
+}
+
 .meNav a:hover, .meNav .activeLink[routerLink = 'active'] a {
   color: black;
 }

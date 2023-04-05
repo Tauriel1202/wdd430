@@ -19,6 +19,7 @@ import { AppRoutingModule } from './appRouting.module';
 import { HeaderComponent } from './header/header.component';
 import { CharItemComponent } from './chars/chars-list/char-item/char-item.component';
 import { EnemyItemComponent } from './enemies/enemies-list/enemy-item/enemy-item.component';
+import { LandItemComponent } from './lands/lands-list/land-item/land-item.component';
 
 @NgModule({
   declarations: [
@@ -26,17 +27,22 @@ import { EnemyItemComponent } from './enemies/enemies-list/enemy-item/enemy-item
     CharsComponent,
     EnemiesComponent,
     LandsComponent,
-    CharsListComponent,
+
     CharsDeetsComponent,
     CharsFormComponent,
     CharItemComponent,
-    EnemiesFormComponent,
+    CharsListComponent,
+
     EnemiesDeetsComponent,
+    EnemiesFormComponent,
     EnemyItemComponent,
     EnemiesListComponent,
+
     HeaderComponent,
-    LandsListComponent,
+    
     LandsFormComponent,
+    LandItemComponent,
+    LandsListComponent,
   ],
   imports: [AppRoutingModule, BrowserModule, FormsModule, HttpClientModule],
   providers: [],

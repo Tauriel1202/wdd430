@@ -35,8 +35,6 @@ const appRoutes: Routes = [
     component: LandsComponent,
     children: [
       { path: 'new', component: LandsFormComponent },
-      { path: ':id', component: LandsComponent },
-      { path: ':id/edit', component: LandsFormComponent },
     ],
   },
 ];

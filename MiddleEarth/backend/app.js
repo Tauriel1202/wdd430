@@ -3,11 +3,12 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const Char = require("./models/char");
+const Enemy = require("./models/enemy");
+const Land = require("./models/land");
+
 const app = express();
 
 const dotenv = require("dotenv");
-const { ObjectId } = require("mongodb");
-const Enemy = require("./models/enemy");
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URI);
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
   next();
 });
 
+//Char paths
 app.post("/chars", (req, res, next) => {
   console.log("B: ", req.body);
   const char = new Char({
@@ -150,6 +152,32 @@ app.delete("/enemies/:enemyId", (req, res, next) => {
     Enemy.deleteOne({ enemyId: req.params.enemyId }).then(() => {
       res.status(204).json({ message: "Enemy defeated!" });
     });
+  });
+});
+
+//Lands paths
+app.get("/lands", (req, res, next) => {
+  Land.find().then((data) => {
+    console.log(data);
+    res.status(200).json({
+      message: "Lands found!",
+      lands: data,
+    });
+  });
+});
+
+app.post("/lands", (req, res, next) => {
+  console.log("Land app.post body", req.body);
+  const land = new Land({
+    id: req.body.id,
+    landId: req.body.landId,
+    name: req.body.name,
+    imgUrl: req.body.imgUrl,
+  });
+  console.log(land);
+
+  land.save().then((data) => {
+    res.status(201).json({ message: "New land discovered!", lId: data._id });
   });
 });
 
