@@ -31,8 +31,13 @@ h2 {
   padding: 1em;
   margin-right: 2em;
 }
-app-char-item {
-  border: 3px solid #00d9ff;
+app-enemy-item {
+  border: 3px solid #ff0000;
   width: 20em;
+  height: 17em;
   text-align: center;
+}
+
+app-enemy-item:hover {
+  background-image: linear-gradient(90deg, red, yellow, yellow, red);
 }

@@ -11,7 +11,6 @@ import { CharService } from '../chars.service';
 export class CharsListComponent implements OnInit, OnDestroy {
   chars: Char[] = [];
   subscr!: Subscription;
-  // if search is implemented: term: string;
 
   constructor(private charService: CharService) {
     this.charService.getChars();
@@ -24,10 +23,6 @@ export class CharsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  // if search implemented
-  // search(value: string){
-  // this.term = value;
-  // }
 
   ngOnDestroy() {
     this.subscr.unsubscribe();

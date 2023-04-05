@@ -4,4 +4,11 @@ a {
 .itemImg {
   padding-left: 6.5em;
   padding-top: 1em;
+  height: 12em;
+  width: auto;
+  margin: auto;
+}
+img {
+  width: 8em;
+  height: auto;
 }

@@ -4,4 +4,7 @@ a {
 .itemImg {
   padding-left: 6.5em;
   padding-top: 1em;
+  width: auto;
+  height: 12em;
+  margin: auto;
 }

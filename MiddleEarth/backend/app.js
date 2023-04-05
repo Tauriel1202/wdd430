@@ -108,20 +108,48 @@ app.get("/enemies", (req, res, next) => {
 });
 
 app.post("/enemies", (req, res, next) => {
+  console.log("Enemy App.post Body:", req.body);
   const enemy = new Enemy({
     id: req.body.id,
     enemyId: req.body.enemyId,
     imgUrl: req.body.imgUrl,
     land: req.body.land,
     name: req.body.name,
-    role: req.body,
+    role: req.body.role,
     species: req.body.species,
   });
-
   console.log(enemy);
+
   enemy.save().then((result) => {
     console.log("R: ", result);
     res.status(201).json({ message: "Enemy found! 💩", eId: result._id });
+  });
+});
+
+app.put("/enemies/:enemyId", (req, res, next) => {
+  const enemy = new Enemy({
+    _id: req.body.id,
+    enemyId: req.body.enemyId,
+    imgUrl: req.body.imgUrl,
+    land: req.body.land,
+    name: req.body.name,
+    role: req.body.role,
+    species: req.body.species,
+  });
+  Enemy.deleteOne({ enemyId: req.params.enemyId }).then(() => {
+    Enemy.updateOne({ enemyId: req.body.enemyId }).then((result) => {
+      enemy.save(result);
+      res.status(200).json({ message: "Enemy updated!" });
+    });
+  });
+});
+
+app.delete("/enemies/:enemyId", (req, res, next) => {
+  console.log("App delete:", req.params.enemyId);
+  Enemy.findOne({ enemyId: req.params.enemyId }).then(() => {
+    Enemy.deleteOne({ enemyId: req.params.enemyId }).then(() => {
+      res.status(204).json({ message: "Enemy defeated!" });
+    });
   });
 });
 

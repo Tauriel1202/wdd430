@@ -51,7 +51,7 @@ export class EnemyService {
     const enemy: Enemy = newEnemy;
 
     this.http
-      .post<{ message: String; eId: string }>(
+      .post<{ message: string; eId: string }>(
         'http://localhost:3000/enemies',
         enemy
       )
@@ -75,7 +75,7 @@ export class EnemyService {
     console.log('The Elves are editting the enemies.');
 
     this.http
-      .put<Enemy[]>(`http://localhost:3000/chars/` + orig.enemyId, newEnemy)
+      .put<Enemy[]>(`http://localhost:3000/enemies/` + orig.enemyId, newEnemy)
       .subscribe((response) => {
         console.log('👍', response);
         this.enemies[pos] = newEnemy;
@@ -87,7 +87,7 @@ export class EnemyService {
     console.log(enemy);
     this.http
       .delete<{ message: string }>(
-        'http://localhost:3000/chars/' + enemy.enemyId
+        'http://localhost:3000/enemies/' + enemy.enemyId
       )
       .subscribe((res) => {
         // this.chars.splice(pos, 1);
