@@ -27,5 +27,6 @@ export class LandsFormComponent {
 
   onCancel() {
     this.router.navigate(['/lands']);
+    this.landForm.resetForm();
   }
 }
